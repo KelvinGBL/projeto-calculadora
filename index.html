@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <style>
+            *{
+                margin: 0;
+                padding: 0;
+                font-family: monospace;
+            }
+            body{
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                height: 100vh;
+                background-image: linear-gradient(blue, rgb(1, 1, 112));
+            }
+            #calculadora{
+                display: flex;
+                flex-direction: column;
+                width: 400px;
+                background-color: white;
+                border-radius: 10px;
+                padding: 1rem;
+                box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
+            }
+            #calculadora #resultado{
+                display: block;
+                text-align: right;
+                height: 80px;
+                font-size: 2rem;
+                border: 2px solid transparent;
+                background-color: rgb(241, 238, 238);
+                color: blue;
+                padding: 0rem 1rem;
+                border-radius: 10px;
+                margin-bottom: 0.5rem;
+                box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
+            }
+            #conteiner-button{
+                display: flex;
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+            button{
+                font-size: 2rem;
+                width: 100%;
+                border-radius: 10px;
+                transition: 0.4s;
+                border: 2px solid transparent;
+                color: blue;
+                background-color: rgb(241, 238, 238);
+                box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
+            }
+            button:hover{
+                color: white;
+                background-color: blue;
+                cursor: pointer;
+                transition: 0.4s;
+            }
+            .btn-operador{
+                background-image: linear-gradient(blue, rgb(2, 2, 156));
+                border: none;
+                color: white;
+                font-weight: bold;
+            }
+            #btn-limpar{
+                background-image: linear-gradient(blue, rgb(2, 2, 156));
+                color: white;
+                border: none;
+                width: 1260px;
+                transition: 0.4s;
+            }
+            #btn-limpar:hover{
+                transition: 0.4s;
+            }
+            #btn-resultado{
+                background-image: linear-gradient(blue, rgb(2, 2, 156));
+                border: none;
+                color: white;
+            }
+            #calculadora .row1, .row2, .row3, .row4, .row5{
+                display: flex;
+                gap: 0.5rem;
+                height: 80px;
+                flex-direction: row;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="calculadora">
+            <input id="resultado" type="text" placeholder="0">
+            <div id="conteiner-button">
+                <div class="row1">
+                    <button id="btn-limpar">C</button>
+                    <button class="btn-operador">/</button>
+                </div>
+                <div class="row2">
+                    <button class="number">7</button>
+                    <button class="number">8</button>
+                    <button class="number">9</button>
+                    <button class="btn-operador">*</button>
+                </div>
+                <div class="row3">
+                    <button class="number">4</button>
+                    <button class="number">5</button>
+                    <button class="number">6</button>
+                    <button class="btn-operador">-</button>
+                </div>
+                <div class="row4">
+                    <button class="number">1</button>
+                    <button class="number">2</button>
+                    <button class="number">3</button>
+                    <button class="btn-operador">+</button>
+                </div>
+                <div class="row5">
+                    <button class="number">0</button>
+                    <button id="btn-resultado">=</button>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            let res = document.getElementById("resultado");
+            let numeros = document.querySelectorAll(".number");
+            let operadores = document.querySelectorAll(".btn-operador");
+
+            let isClickOperator = false;
+
+            let btnLimpar = document.getElementById("btn-limpar");
+            let btnResultado = document.getElementById("btn-resultado");
+
+            let n1 = 0;
+            let n2 = 0;
+            let resultado = 0;
+            let operator = "";
+
+            function adicao(num1, num2){
+                resultado = num1 + num2;
+                return resultado;
+            }
+            function subtracao(num1, num2){
+                resultado = num1 - num2;
+                return resultado;
+            }
+            function multiplicacao(num1, num2){
+                resultado = num1 * num2;
+                return resultado;
+            }
+            function divisao(num1, num2){
+                resultado = num1 / num2;
+                return resultado;
+            }
+
+            function verificarOperador(num1, num2){
+                if(operator == "+"){
+                    res.value = String(adicao(num1, num2));
+                    return true;
+                }
+                else if(operator == "-"){
+                    res.value = String(subtracao(num1, num2));
+                    return true;
+                }
+                else if(operator == "*"){
+                    res.value = String(multiplicacao(num1, num2));
+                    return true;
+                }
+                else if(operator == "/"){
+                    res.value = String(divisao(num1, num2));
+                    return true;
+                }
+                else{
+                    return false;
+                }
+            }
+
+
+            for(let i = 0; i <= 9 ;i++){
+                numeros[i].addEventListener('click', function(){
+                    res.value += String(numeros[i].innerHTML);
+
+                    if(isClickOperator == false){
+                        n1 = Number(res.value);
+                    }
+                    if(isClickOperator == true){
+                        n2 += String(numeros[i].innerHTML);
+                        n2 = Number(n2);
+                    }
+
+                });
+            }
+
+            for(let i = 0; i <= 3 ;i++){
+                operadores[i].addEventListener('click', function(){
+                    if(isClickOperator == false){
+                        res.value += String(operadores[i].innerHTML);
+                        operator = String(operadores[i].innerHTML);
+
+                        isClickOperator = true;
+                    }
+                });
+            }
+
+            btnLimpar.addEventListener('click', function(){
+                isClickOperator = false;
+                n1 = 0;
+                n2 = 0;
+                operator = "";
+                res.value = "";
+            })
+
+            btnResultado.addEventListener('click', function(){
+
+                if(verificarOperador(n1, n2)){
+                    isClickOperator = false;
+                    n1 = resultado;
+                    n2 = 0;
+                }
+            })
+        </script>
+    </body>
+</html>
