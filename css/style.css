@@ -20,6 +20,8 @@ body{
     border-radius: 10px;
     padding: 1rem;
     box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
+    scale: 0.0;
+    transition: 1s;
 }
 #calculadora #resultado{
     display: block;
@@ -40,7 +42,10 @@ body{
     gap: 0.5rem;
 }
 button{
-    font-size: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3.4rem;
     width: 100%;
     border-radius: 10px;
     transition: 0.4s;
@@ -66,19 +71,25 @@ button:hover{
     font-size: 3.8rem;
 }
 #btn-limpar{
+    font-size: 3.4rem;
     background-image: linear-gradient(blue, rgb(2, 2, 156));
     color: white;
     border: none;
     width: 1260px;
-    transition: 0.4s;
+    transition: 0.2s;
 }
 #btn-limpar:hover{
-    transition: 0.4s;
+    font-size: 3.8rem;
+    transition: 0.2s;
 }
 #btn-resultado{
     background-image: linear-gradient(blue, rgb(2, 2, 156));
     border: none;
     color: white;
+}
+#btn-resultado:hover{
+    font-size: 3.8rem;
+    transition: 0.2s;
 }
 #calculadora .row1, .row2, .row3, .row4, .row5{
     display: flex;

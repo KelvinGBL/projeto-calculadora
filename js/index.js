@@ -1,5 +1,11 @@
+let calculadora = document.getElementById("calculadora");
+
+function carregarCal(){
+    calculadora.style.scale="1.0";
+}
+
 let res = document.getElementById("resultado");
-let numeros = document.querySelectorAll(".number");
+let numeros = document.querySelectorAll(".btn-number");
 let operadores = document.querySelectorAll(".btn-operador");
 
 let isClickOperator = false;
@@ -7,6 +13,7 @@ let isClickOperator = false;
 let btnLimpar = document.getElementById("btn-limpar");
 let btnResultado = document.getElementById("btn-resultado");
 
+let operaAritimeticos = ["/", "*", "-", "+"];
 let n1 = 0;
 let n2 = 0;
 let resultado = 0;
@@ -69,8 +76,8 @@ for(let i = 0; i <= 9 ;i++){
 for(let i = 0; i <= 3 ;i++){
     operadores[i].addEventListener('click', function(){
         if(isClickOperator == false){
-            res.value += String(operadores[i].innerHTML);
-            operator = String(operadores[i].innerHTML);
+            res.value += String(operaAritimeticos[i]);
+            operator = String(operaAritimeticos[i]);
 
             isClickOperator = true;
         }
