@@ -75,12 +75,20 @@ button:hover{
     background-image: linear-gradient(blue, rgb(2, 2, 156));
     color: white;
     border: none;
-    width: 1260px;
-    transition: 0.2s;
+    width: 830px;
 }
 #btn-limpar:hover{
     font-size: 3.8rem;
     transition: 0.2s;
+}
+#btn-deletar{
+    background-image: linear-gradient(blue, rgb(2, 2, 156));
+    color: white;
+    border: none;
+    font-weight: bold;
+}
+#btn-deletar:hover{
+    font-size: 3.8rem;
 }
 #btn-resultado{
     background-image: linear-gradient(blue, rgb(2, 2, 156));
