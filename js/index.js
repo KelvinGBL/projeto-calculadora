@@ -6,14 +6,11 @@ function carregarCal(){
 }
 
 let res = document.getElementById("resultado");
-let numeros = document.querySelectorAll(".btn-number");
-let operadores = document.querySelectorAll(".btn-operador");
 
 let btnLimpar = document.getElementById("btn-limpar");
 let btnDeletar = document.getElementById("btn-deletar");
 let btnResultado = document.getElementById("btn-resultado");
 
-let operaAritimeticos = ["/", "*", "-", "+"];
 let n1 = 0, n2 = 0;
 let resultado = 0;
 let operator = "";
@@ -39,33 +36,26 @@ function verificarOperador(num1, num2){
         default:
             alert("Digite o proxímo número!");
     }
-    n1 = ""; 
-    n2 = "";
-   
+    n1 = ""; n2 = "";
     resultado == 0 ? res.value = "" : res.value = String(resultado);
 }
 
-
-for(let i1 = 0; i1 <= 9 ;i1++){
-    numeros[i1].addEventListener('click', function(){
-        res.value += numeros[i1].innerHTML;
-        resArray.push(numeros[i1].innerHTML);
-    });
+function addNumber(n){
+    res.value += n;
+    resArray.push(n);
 }
 
-for(let i2 = 0; i2 <= 3 ;i2++){
-    operadores[i2].addEventListener('click', function(){
-        if(isClick == false && res.value != ""){
-            res.value += operaAritimeticos[i2];
-            resArray.push(operaAritimeticos[i2]);
-            operator = operaAritimeticos[i2];
-            isClick = true;
-        }
-    });
+function addOperator(o){
+    if(isClick == false && res.value != ""){
+        res.value += o;
+        resArray.push(o);
+        operator = o;
+        isClick = true;
+    }
 }
 
 btnLimpar.addEventListener('click', function(){
-    n1 = 0, n2 = 0;
+    n1 = 0; n2 = 0;
     operator = "";
     res.value = "";
     resArray = [];
@@ -82,7 +72,6 @@ btnDeletar.addEventListener('click', function(){
 })
 
 btnResultado.addEventListener('click', function(){
-
     if(res.value != "" && isClick == true){
         for(let i = 0; i < resArray.lastIndexOf(operator); i++){
             n1+= resArray[i];
@@ -91,8 +80,7 @@ btnResultado.addEventListener('click', function(){
             n2+= resArray[i];
         }
         
-        n1 = Number(n1);
-        n2 = Number(n2);
+        n1 = Number(n1); n2 = Number(n2);
         
         verificarOperador(n1, n2)
         resArray = [];

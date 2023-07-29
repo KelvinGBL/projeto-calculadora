@@ -10,7 +10,10 @@ body{
     align-items: center;
     justify-content: center;
     height: 100vh;
-    background-image: linear-gradient(blue, rgb(1, 1, 112));
+    background-image: linear-gradient(blue, rgb(2, 2, 156));
+}
+svg{
+    fill: #ffffff;
 }
 #calculadora{
     display: flex;
@@ -49,7 +52,7 @@ button{
     width: 100%;
     border-radius: 10px;
     transition: 0.4s;
-    border: 2px solid transparent;
+    border: none;
     color: blue;
     background-color: rgb(241, 238, 238);
     box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
@@ -63,41 +66,32 @@ button:hover{
 }
 .btn-operador{
     background-image: linear-gradient(blue, rgb(2, 2, 156));
-    border: none;
     color: white;
-    font-weight: bold;
 }
 .btn-operador:hover{
     font-size: 3.8rem;
 }
 #btn-limpar{
-    font-size: 3.4rem;
     background-image: linear-gradient(blue, rgb(2, 2, 156));
     color: white;
-    border: none;
-    width: 830px;
+    width: 825px;
 }
 #btn-limpar:hover{
     font-size: 3.8rem;
-    transition: 0.2s;
 }
 #btn-deletar{
     background-image: linear-gradient(blue, rgb(2, 2, 156));
     color: white;
-    border: none;
-    font-weight: bold;
 }
 #btn-deletar:hover{
     font-size: 3.8rem;
 }
 #btn-resultado{
     background-image: linear-gradient(blue, rgb(2, 2, 156));
-    border: none;
     color: white;
 }
 #btn-resultado:hover{
     font-size: 3.8rem;
-    transition: 0.2s;
 }
 #calculadora .row{
     display: flex;
