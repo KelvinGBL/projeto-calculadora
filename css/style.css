@@ -99,7 +99,7 @@ button:hover{
     font-size: 3.8rem;
     transition: 0.2s;
 }
-#calculadora .row1, .row2, .row3, .row4, .row5{
+#calculadora .row{
     display: flex;
     gap: 0.5rem;
     height: 80px;
