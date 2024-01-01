@@ -1,83 +1,83 @@
-"use strict";
-let calculadora = document.getElementById("calculadora");
+
 function carregarCal() {
-    calculadora.style.scale = "1.0";
+    document.getElementById("calculadora").style.scale = "1.0";
 }
-let res = document.getElementById("resultado");
-// Buttons
-let btnLimpar = document.getElementById("btn-limpar");
-let btnDeletar = document.getElementById("btn-deletar");
-let btnResultado = document.getElementById("btn-resultado");
-// Variáveis Globais
-let n1 = "";
-let n2 = "";
-let resultado = 0;
-let operator = "";
-let isClick = false;
-let resArray = [];
-function verificarOperador(num1, num2) {
-    switch (operator) {
+
+let resultado = document.getElementById("resultado");
+
+function fazerOperacao(num1, num2, operator){
+    let res = 0;
+    switch (operator){
         case "+":
-            resultado = num1 + num2;
+            res = num1 + num2;
             break;
         case "-":
-            resultado = num1 - num2;
+            res = num1 - num2;
             break;
         case "*":
-            resultado = num1 * num2;
+            res = num1 * num2;
             break;
         case "/":
-            resultado = num1 / num2;
+            if(num1 == 0 || num2 == 0){
+                alert("Não é possível dividir por zero.")
+                res = "";
+            }else{
+                res = num1 / num2;
+            }
             break;
-        default:
-            alert("Digite o proxímo número!");
     }
-    n1 = "";
-    n2 = "";
-    resultado == 0 ? res.value = "" : res.value = String(resultado);
+    return String(res);
 }
-function addNumber(n) {
-    res.value += n;
-    resArray.push(n);
-}
-function addOperator(o) {
-    if (isClick == false && res.value != "") {
-        res.value += o;
-        resArray.push(o);
-        operator = o;
-        isClick = true;
+
+var n1 = "", n2 = "";
+let operator = "";
+
+function addNumber(num){
+    resultado.value += num;
+
+    if(operator == ""){
+        n1 += num;
+    }else{
+        n2 += num;
     }
 }
-btnLimpar.addEventListener('click', function () {
+function addOperator(op){
+    if(!'+-*/'.includes(resultado.value.slice(-1)) && operator == ""){
+        resultado.value += op;
+        operator = op;
+    }
+}
+
+let btnLimpar = document.getElementById("btn-limpar");
+btnLimpar.addEventListener('click',()=>{
     n1 = "";
     n2 = "";
     operator = "";
-    res.value = "";
-    resArray = [];
-    isClick = false;
+    resultado.value = "";
 });
-btnDeletar.addEventListener('click', function () {
-    res.value = res.value.slice(0, res.value.length - 1);
-    resArray.pop();
-    if (res.value.indexOf(operator) == -1) {
-        isClick = false;
+
+let btnDeletar = document.getElementById("btn-deletar");
+btnDeletar.addEventListener('click',()=>{
+    if(n2 == "" && operator == "") {
+        resultado.value = resultado.value.slice(0,-1);
+        n1 = n1.slice(0,-1);
+    }
+    if('+-*/'.includes(resultado.value.slice(-1))) {
+        resultado.value = resultado.value.slice(0,-1);
         operator = "";
     }
-});
-btnResultado.addEventListener('click', function () {
-    if (res.value != "" && isClick == true) {
-        for (let i = 0; i < resArray.lastIndexOf(operator); i++) {
-            n1 += resArray[i];
-        }
-        for (let i = resArray.lastIndexOf(operator) + 1; i < resArray.length; i++) {
-            n2 += resArray[i];
-        }
-        verificarOperador(Number(n1), Number(n2));
-        resArray = [];
-        operator = "";
-        for (let i = 0; i < String(resultado).length; i++) {
-            resArray.push(String(resultado).charAt(i));
-        }
-        isClick = false;
+    if(n1 != "" && operator != "") {
+        resultado.value = resultado.value.slice(0,-1);
+        n2 = n2.slice(0,-1);
     }
 });
+
+let btnResultado = document.getElementById("btn-resultado");
+btnResultado.addEventListener('click',()=>{
+    if(!'+-*/'.includes(resultado.value.slice(-1))){
+        resultado.value = fazerOperacao(Number(n1), Number(n2), operator);
+        n1 = resultado.value;
+        n2 = "";
+        operator = "";
+    }
+})
