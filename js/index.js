@@ -1,9 +1,6 @@
-
 function carregarCal() {
     document.getElementById("calculadora").style.scale = "1.0";
 }
-
-let resultado = document.getElementById("resultado");
 
 function fazerOperacao(num1, num2, operator){
     let res = 0;
@@ -29,8 +26,8 @@ function fazerOperacao(num1, num2, operator){
     return String(res);
 }
 
-var n1 = "", n2 = "";
-let operator = "";
+var n1 = "", n2 = "", operator = "";
+let resultado = document.getElementById("resultado");
 
 function addNumber(num){
     resultado.value += num;
@@ -48,16 +45,14 @@ function addOperator(op){
     }
 }
 
-let btnLimpar = document.getElementById("btn-limpar");
-btnLimpar.addEventListener('click',()=>{
+$('#btn-limpar').click(()=>{
     n1 = "";
     n2 = "";
     operator = "";
     resultado.value = "";
-});
+})
 
-let btnDeletar = document.getElementById("btn-deletar");
-btnDeletar.addEventListener('click',()=>{
+$('#btn-deletar').click(()=>{
     if(n2 == "" && operator == "") {
         resultado.value = resultado.value.slice(0,-1);
         n1 = n1.slice(0,-1);
@@ -70,10 +65,9 @@ btnDeletar.addEventListener('click',()=>{
         resultado.value = resultado.value.slice(0,-1);
         n2 = n2.slice(0,-1);
     }
-});
+})
 
-let btnResultado = document.getElementById("btn-resultado");
-btnResultado.addEventListener('click',()=>{
+$('#btn-resultado').click(()=>{
     if(!'+-*/'.includes(resultado.value.slice(-1))){
         resultado.value = fazerOperacao(Number(n1), Number(n2), operator);
         n1 = resultado.value;
