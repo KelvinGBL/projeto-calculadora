@@ -31,12 +31,7 @@ let resultado = document.getElementById("resultado");
 
 function addNumber(num){
     resultado.value += num;
-
-    if(operator == ""){
-        n1 += num;
-    }else{
-        n2 += num;
-    }
+    operator == "" ? n1 += num : n2 += num;
 }
 function addOperator(op){
     if(!'+-*/'.includes(resultado.value.slice(-1)) && operator == ""){
